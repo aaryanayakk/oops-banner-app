@@ -1,16 +1,23 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class OOPSBannerApp {
 
     public static void main(String[] args) {
 
-        String word = "OOPS";
+        Map<Character, String[]> patternMap = CharacterPattern.getPatterns();
+
+        renderBanner("OOPS", patternMap);
+    }
+
+    public static void renderBanner(String word, Map<Character, String[]> map) {
 
         for (int row = 0; row < 7; row++) {
 
             for (int i = 0; i < word.length(); i++) {
 
                 char ch = word.charAt(i);
-
-                String[] pattern = CharacterPattern.getPattern(ch);
+                String[] pattern = map.get(ch);
 
                 System.out.print(pattern[row] + "  ");
             }
@@ -21,57 +28,42 @@ public class OOPSBannerApp {
 }
 
 
-/* UC7 Class storing patterns */
-
 class CharacterPattern {
 
-    public static String[] getPattern(char ch) {
+    public static Map<Character, String[]> getPatterns() {
 
-        switch (ch) {
+        Map<Character, String[]> map = new HashMap<>();
 
-            case 'O':
-                return new String[]{
-                        " ***** ",
-                        "*     *",
-                        "*     *",
-                        "*     *",
-                        "*     *",
-                        "*     *",
-                        " ***** "
-                };
+        map.put('O', new String[]{
+                " ***** ",
+                "*     *",
+                "*     *",
+                "*     *",
+                "*     *",
+                "*     *",
+                " ***** "
+        });
 
-            case 'P':
-                return new String[]{
-                        " ***** ",
-                        "*     *",
-                        "*     *",
-                        " ***** ",
-                        "*      ",
-                        "*      ",
-                        "*      "
-                };
+        map.put('P', new String[]{
+                " ***** ",
+                "*     *",
+                "*     *",
+                " ***** ",
+                "*      ",
+                "*      ",
+                "*      "
+        });
 
-            case 'S':
-                return new String[]{
-                        " ***** ",
-                        "*      ",
-                        "*      ",
-                        " ***** ",
-                        "      *",
-                        "      *",
-                        " ***** "
-                };
+        map.put('S', new String[]{
+                " ***** ",
+                "*      ",
+                "*      ",
+                " ***** ",
+                "      *",
+                "      *",
+                " ***** "
+        });
 
-            default:
-                return new String[]{
-                        " ",
-                        " ",
-                        " ",
-                        " ",
-                        " ",
-                        " ",
-                        " "
-                };
-        }
+        return map;
     }
 }
